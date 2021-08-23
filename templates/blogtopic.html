@@ -1,0 +1,59 @@
+{% extends 'base.html'%}
+
+{% block title %}
+Categories
+{% endblock title %}
+
+
+{% block content %}
+<div class="container my-3">
+
+    <div class="row">
+
+        {% if topics %}
+        {% for tp in topics %}
+        <div class="col-12 col-lg-4">
+            <div class="card">
+                <img src="{{tp.post_img.url}}" alt="image">
+                <div class="card-body">
+                    <h5 class="text-center">
+                        <b> <i> {{tp.name}} </i> </b>
+                    </h5>
+                    <p class="text-center text-danger">Date Created:
+                    <h5 class="text-success text-center"> <strong><i>{{tp.date_created}}</i></strong></h5>
+                    </p>
+                    <p class="text-center text-danger">Created by:
+                    <h5 class="text-success text-center"> <strong>
+                            {% if tp.user.id == request.user.id %}
+                            <i>You</i>
+                            {% else %}
+                            <i>{{tp.user.first_name}} {{tp.user.last_name}}</i>
+                            {% endif %}</strong></h5>
+                    </p>
+                    <div class="text-center">
+                        {% if request.user.username == 'admin' %}
+                            <a href="{% url 'delete_blog' tp.id %}" class="btn btn-outline-danger my-2 w-100">Delete Blog</a>
+                        {% else %}
+                        {% endif %}
+                        <a href="{% url 'view_blog' title tp.id %}" class="btn btn-outline-success my-2 w-100">View
+                            blog</a>
+                        {% if tp.user.id != request.user.id %}
+                        <a href="{% url 'addComments' tp.id tp.user.id  %}" class="btn btn-outline-primary my-2 w-100">Add Comments</a>
+
+                        <a href="{% url 'viewComments' tp.name tp.user.id %}" class="btn btn-outline-primary my-2 w-100">View Comments</a>
+                        {% else %}
+                            <a href="{% url 'viewComments' tp.name tp.user.id %}" class="btn btn-outline-primary my-2 w-100">View Comments</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+        {% else %}
+            <h2 class="text-center alert alert-danger">No posts on this category till date</h2>
+        {% endif %}
+
+    </div>
+
+</div>
+{% endblock content %}

@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Edit Post
+{% endblock title %}
+
+{% block content %}
+    <div class="container my-3">
+    <div class="row">
+        <div class="col-12 col-lg-10 offset-1">
+            <form action="" class="shadow p-3" method="POST" enctype='multipart/form-data' novalidate>
+                <h5 class="text-center alert alert-danger">Edit Post Here</h5>
+                {% csrf_token %}
+                {% for fm in forms %}
+                <p>{{fm.label_tag}}{{fm}} <small class="text-danger">{{fm.errors|striptags}}</small> </p>
+                {% endfor %}
+                <div class="text-center">
+                    <input type="submit" value="Edit" class="btn btn-outline-success w-100 my-2">
+                </div>
+                {% if forms.non_field_errors %}
+                {% for error in forms.non_field_errors %}
+                <p class="alert alert-danger my-3">{{error}}</p>
+                {% endfor %}
+                {% endif %}
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock content %}

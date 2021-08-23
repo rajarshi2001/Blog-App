@@ -1,0 +1,35 @@
+{% extends 'base.html'%}
+
+{% block title %}
+Category
+{% endblock title %}
+
+{% block content %}
+<div class="container my-3">
+    {% if messages %}
+    {% for message in messages %}
+    <p {% if message.tags %} class="alert alert-{{message.tags}} mb-5" {% endif %}>{{message}}</p>
+    {% endfor %}
+    {% endif %}
+    <div class="row">
+        <div class="col-12 col-lg-10 offset-1">
+            <form action="" method="POST" class="shadow p-3" enctype="multipart/form-data" novalidate>
+
+                <h2 class="text-center alert alert-success">Add Category</h2>
+                {% csrf_token %}
+                {% for fm in forms %}
+                <p>{{fm.label_tag}}{{fm}} <small class="text-danger">{{fm.errors|striptags}}</small></p>
+                {% endfor %}
+                <div class="text-center">
+                    <input type="submit" value="Add Category" class="btn btn-outline-secondary w-100 my-3">
+                </div>
+            </form>
+            {% if forms.non_field_errors %}
+            {% for error in forms.non_field_errors %}
+            <p class="alert alert-danger my-3">{{error}}</p>
+            {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock content %}

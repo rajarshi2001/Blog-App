@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Sign Up
+{% endblock title %}
+
+{% block content %}
+<div class="container my-3">
+    <div class="row my-3">
+        <div class="col-12 col-lg-10 offset-1">
+            <form action="" class="shadow p-3" method="POST" novalidate>
+                <h5 class="text-center alert alert-danger">Sign Up Here</h5>
+                {% if messages %}
+                {% for message in messages %}
+                <p {% if message.tags %} class="alert alert-{{message.tags}} mb-5" {% endif %}>{{message}}</p>
+                {% endfor %}
+                {% endif %}
+                {% csrf_token %}
+                {% for fm in forms %}
+                <p>{{fm.label_tag}}{{fm}} <small class="text-danger">{{fm.errors|striptags}}</small> </p>
+                {% endfor %}
+                <div class="text-center">
+                    <input type="submit" value="Sign Up" class="btn btn-outline-secondary w-100 my-2">
+                </div>
+                {% if forms.non_field_errors %}
+                {% for error in forms.non_field_errors %}
+                <p class="alert alert-danger my-3">{{error}}</p>
+                {% endfor %}
+                {% endif %}
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock content %}

@@ -1,0 +1,28 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.setTitle{
+    font-size:25px;
+    font-weight: bold;
+    color: blueviolet;
+    font-style: italic;
+    font-family:Georgia, 'Times New Roman', Times, serif
+}
+.blogimg{
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.setfooter{
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: red;
+    color: white;
+    text-align: center;
+   
+}

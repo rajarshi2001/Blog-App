@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Blogs
+{% endblock title %}
+
+{% block content %}
+    <div class="container my-3">
+        <h5 class="card-title text-center alert alert-danger"> All blogs on {{blogs.name}}</h5>
+        <div class="card border border-primary">
+            <img src="{{blogs.post_img.url}}" alt="image" class="img-fluid img-thumbnail blogimg">
+            <div class="card-body">
+                {{blogs.desc | safe}}
+            </div>
+        </div>
+    </div>
+{% endblock content %}

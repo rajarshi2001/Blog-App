@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+Home
+{% endblock title %}
+
+
+{% block slider %}
+
+<section>
+    <div class="container my-3">
+        {% if messages %}
+        {% for message in messages %}
+        <p {% if message.tags %} class="alert alert-{{message.tags}} mb-5" {% endif %}>{{message}}</p>
+        {% endfor %}
+        {% endif %}
+        <div class="m-3">
+            <h2 class="alert alert-info text-center"> <i> Welcome {{request.user.first_name}} here are our blogs</i></h2>
+            <div class="owl-carousel" id="slider1">
+                {% for ct in category %}
+                <div class="item">
+                    <div class="card">
+                        <img src="{{ct.cat_img.url}}" alt="" height="250px">
+                        <div class="card-body">
+                            <h5 class="fw-bold text-center setTitle">{{ct.title}}</h5>
+                            <div class="text-center">
+                                {% if request.user.username == 'admin' %}
+                                     <a href="{% url 'deleteCat' ct.id %}" class="btn btn-outline-primary ">Delete</a>
+                                {% else %}
+                                {% endif %}
+                                <a href="{% url 'topic' ct.title %}" class="btn btn-outline-primary ">View more</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+    </div>
+    
+</section>
+{% endblock slider %}

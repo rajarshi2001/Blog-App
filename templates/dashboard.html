@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Dashboard
+{% endblock title %}
+
+{% block content %}
+<div class="container my-3">
+    <h2 class="text-center alert alert-info"> <i><b>See Your Dashboard {{request.user.first_name}}</b></i></h2>
+    <div class="row">
+        {% if not indPosts %}
+            <h2 class="text-center alert alert-danger">You have not made any posts</h2>
+        {% else %}
+        {% for pt in indPosts %}
+        <div class="col-12 col-lg-4">
+            <div class="card">
+                <img src="{{pt.post_img.url}}" alt="image">
+                <div class="card-body">
+                    <h5 class="text-center">
+                        <b> <i> {{pt.name}} </i> </b>
+                    </h5>
+                    <div class="text-center">
+                        <a href="{% url 'editPost' pt.id %}" class="btn btn-outline-danger my-2 w-100">Edit this blog</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+        {% endif %}
+    </div>
+</div>
+{% endblock content %}
